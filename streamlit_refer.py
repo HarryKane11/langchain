@@ -109,6 +109,7 @@ def get_text(docs):
     temp_dir = tempfile.TemporaryDirectory()
     for doc in docs:
         temp_filepath = os.path.join('/tmp', doc.name)
+        doc.save(temp_filepath)
         if '.pdf' in doc.name:
             loader = PyPDFLoader(temp_filepath)
             documents = loader.load_and_split()
