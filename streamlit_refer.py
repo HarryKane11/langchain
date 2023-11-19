@@ -103,28 +103,18 @@ def tiktoken_len(text):
     tokens = tokenizer.encode(text)
     return len(tokens)
 
-def save_file_locally(file):
-    '''Save uploaded files locally'''
-    doc_path = os.path.join('data/',file.name)
-    with open(doc_path,'wb') as f:
-        f.write(file.getbuffer())
-    
-    return doc_path
-
 def get_text(docs):
 
     doc_list = []
     for doc in docs:
-        doc_path = save_file_locally(doc)
-
         if '.pdf' in doc.name:
-            loader = PyPDFLoader(doc_path)
+            loader = PyPDFLoader(doc)
             documents = loader.load_and_split()
         elif '.docx' in doc.name:
-            loader = Docx2txtLoader(doc_path)
+            loader = Docx2txtLoader(doc)
             documents = loader.load_and_split()
         elif '.pptx' in doc.name:
-            loader = UnstructuredPowerPointLoader(doc_path)
+            loader = UnstructuredPowerPointLoader(doc)
             documents = loader.load_and_split()
 
         doc_list.extend(documents)
