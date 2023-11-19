@@ -106,18 +106,21 @@ def tiktoken_len(text):
 def get_text(docs):
 
     doc_list = []
-    temp_dir = tempfile.TemporaryDirectory()
+    
     for doc in docs:
-        temp_filepath = os.path.join('/tmp', doc.name)
-        doc.save(temp_filepath)
+        temp_file = "./temp.pdf"
+        with open(temp_file, "wb") as file:
+            file.write(doc.getvalue())
+            file_name = doc.name
+            logger.info(f"Uploaded {file_name}")
         if '.pdf' in doc.name:
-            loader = PyPDFLoader(temp_filepath)
+            loader = PyPDFLoader(temp_file)
             documents = loader.load_and_split()
         elif '.docx' in doc.name:
-            loader = Docx2txtLoader(temp_filepath)
+            loader = Docx2txtLoader(temp_file)
             documents = loader.load_and_split()
         elif '.pptx' in doc.name:
-            loader = UnstructuredPowerPointLoader(temp_filepath)
+            loader = UnstructuredPowerPointLoader(temp_file)
             documents = loader.load_and_split()
 
         doc_list.extend(documents)
