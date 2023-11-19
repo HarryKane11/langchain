@@ -1,7 +1,6 @@
 import os
 import tempfile
 import streamlit as st
-from docx import Document
 import tiktoken
 
 from langchain.chains import ConversationalRetrievalChain
