@@ -147,11 +147,7 @@ def get_vectorstore(text_chunks):
                                         model_kwargs={'device': 'cpu'},
                                         encode_kwargs={'normalize_embeddings': True}
                                         )  
-    vectordb = Chroma.from_documents(
-            documents=text_chunks,
-            embedding=embeddings,
-            persist_directory='vector_index/'
-        )
+    vectordb = FAISS.from_documents(text_chunks, embeddings)
     return vectordb
 
 def get_conversation_chain(vetorestore,openai_api_key):
