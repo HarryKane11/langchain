@@ -1,5 +1,3 @@
-import os
-import tempfile
 import streamlit as st
 import tiktoken
 from loguru import logger
@@ -13,25 +11,15 @@ from langchain.document_loaders import UnstructuredPowerPointLoader
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import Chroma
 
 from langchain.memory import ConversationBufferMemory
-from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import FAISS
-from dotenv import load_dotenv
 
 # from streamlit_chat import message
 from langchain.callbacks import get_openai_callback
 from langchain.memory import StreamlitChatMessageHistory
 
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-
-
-
 def main():
-    load_dotenv()
     st.set_page_config(
     page_title="DirChat",
     page_icon=":books:")
@@ -81,7 +69,6 @@ def main():
             st.markdown(query)
 
         with st.chat_message("assistant"):
-            
             chain = st.session_state.conversation
 
             with st.spinner("Thinking..."):
@@ -96,7 +83,7 @@ def main():
                     st.markdown(source_documents[0].metadata['source'], help = source_documents[0].page_content)
                     st.markdown(source_documents[1].metadata['source'], help = source_documents[1].page_content)
                     st.markdown(source_documents[2].metadata['source'], help = source_documents[2].page_content)
-    # st.write(source_documents)
+                    
 
 
 # Add assistant message to chat history
