@@ -117,13 +117,13 @@ def get_text(docs):
             file.write(doc.getvalue())
             logger.info(f"Uploaded {file_name}")
         if '.pdf' in doc.name:
-            loader = PyPDFLoader(temp_file)
+            loader = PyPDFLoader(file_name)
             documents = loader.load_and_split()
         elif '.docx' in doc.name:
-            loader = Docx2txtLoader(temp_file)
+            loader = Docx2txtLoader(file_name)
             documents = loader.load_and_split()
         elif '.pptx' in doc.name:
-            loader = UnstructuredPowerPointLoader(temp_file)
+            loader = UnstructuredPowerPointLoader(file_name)
             documents = loader.load_and_split()
 
         doc_list.extend(documents)
