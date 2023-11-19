@@ -112,10 +112,9 @@ def get_text(docs):
     doc_list = []
     
     for doc in docs:
-        temp_file = "./temp.pdf"
-        with open(temp_file, "wb") as file:
+    file_name = doc.name  # doc 객체의 이름을 파일 이름으로 사용
+        with open(file_name, "wb") as file:  # 파일을 doc.name으로 저장
             file.write(doc.getvalue())
-            file_name = doc.name
             logger.info(f"Uploaded {file_name}")
         if '.pdf' in doc.name:
             loader = PyPDFLoader(temp_file)
