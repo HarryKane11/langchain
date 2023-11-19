@@ -8,3 +8,4 @@ tiktoken
 openai
 pypdf
 loguru
+docx2txt
