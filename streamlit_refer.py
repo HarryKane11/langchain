@@ -148,9 +148,10 @@ def get_vectorstore(text_chunks):
                                         encode_kwargs={'normalize_embeddings': True}
                                         )  
     vectordb = Chroma.from_documents(
-                                    text_chunks,
-                                    embedding= embeddings
-                                    )
+            documents=splits,
+            embedding=self.embeddings,
+            persist_directory=self.persist_directory
+        )
     return vectordb
 
 def get_conversation_chain(vetorestore,openai_api_key):
