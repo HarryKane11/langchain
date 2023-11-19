@@ -149,8 +149,8 @@ def get_vectorstore(text_chunks):
                                         )  
     vectordb = Chroma.from_documents(
             documents=text_chunks,
-            embedding=self.embeddings,
-            persist_directory=self.persist_directory
+            embedding=embeddings,
+            persist_directory='vector_index/'
         )
     return vectordb
 
