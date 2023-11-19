@@ -148,7 +148,7 @@ def get_vectorstore(text_chunks):
                                         encode_kwargs={'normalize_embeddings': True}
                                         )  
     vectordb = Chroma.from_documents(
-                                    documents=text_chunks,
+                                    text_chunks,
                                     embedding= embeddings
                                     )
     return vectordb
